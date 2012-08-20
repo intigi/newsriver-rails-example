@@ -1,0 +1,5 @@
+-if @rivers.empty?
+  Please #{ link_to "create a river", new_river_path}.
+-else
+  - @rivers.each do |river|
+    = render(:partial => "rivers/river", :locals => { :river => river, :recommendations => river.recommendations.public.limit(50).order('intigi_found_at desc') })

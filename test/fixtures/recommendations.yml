@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  intigi_url: MyString
+  intigi_title: MyString
+  intigi_excerpt: MyString
+  intigi_found_at: 2012-07-30 13:38:09
+  intigi_host_name: MyString
+  intigi_popularity: 1
+  intigi_word_count: 1
+  topsy_trackback_total: 1
+
+two:
+  intigi_url: MyString
+  intigi_title: MyString
+  intigi_excerpt: MyString
+  intigi_found_at: 2012-07-30 13:38:09
+  intigi_host_name: MyString
+  intigi_popularity: 1
+  intigi_word_count: 1
+  topsy_trackback_total: 1

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @page_title.presence || "Intigi" %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <script src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+  <script src="http://scripts.embed.ly/jquery.embedly.min.js"></script>
+  <%= javascript_include_tag "jquery.masonry.min.js" %>
+  <script type="text/javascript">
+
+    var $container;
+
+    function triggerMasonry() {
+      // don't proceed if $container has not selected
+      if ( !$container ) {
+        return
+      }
+
+      // set timeout because of embedly delay not firing properly
+      setTimeout(function (){
+        $container.masonry({
+          itemSelector : '.recommendation',
+          columnWidth : 500,
+          isAnimated: true
+        });
+      }, 1500);
+
+    }
+
+    $(function(){
+      $container = $('div.recommendations');
+      // trigger masonry on doc ready
+      triggerMasonry();
+    });
+
+    $('document').ready(function(){
+      $('div.recommendation-preview').embedly({
+        maxWidth: 450,
+        words: 100,
+        method: 'after',
+        wmode: 'transparent',
+        key:':<%= ENV['EMBEDLY_API_KEY'] %>'
+      }).bind('embedly-oembed', function(e,oembed){
+            triggerMasonry();
+          });
+    });
+
+  </script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-134630-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+</head>
+<body class="river <%= params[:action] %>">
+
+  <%= yield %>
+
+</body>
+</html>

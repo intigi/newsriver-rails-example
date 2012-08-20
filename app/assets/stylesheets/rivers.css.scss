@@ -1,0 +1,128 @@
+// Place all the styles related to the Rivers controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body.river {
+  background: #efefef;
+  padding: 40px;
+
+  &.show {
+    .all-recommendations {
+      font-weight: bold;
+    }
+  }
+  &.starred {
+    .starred-recommendations {
+      font-weight: bold;
+    }
+  }
+}
+.river {
+  margin-bottom: 75px;
+}
+.river-views {
+  margin-bottom: 20px;
+  color: #777;
+
+  a {
+    color: #777;
+  }
+}
+.recommendations {
+
+  width: 100%;
+
+  .recommendation {
+    float: left;
+    position: relative;
+    background: white;
+    padding: 20px 20px 50px 20px;
+    margin-bottom: 30px;
+    margin-right: 30px;
+    width: 430px;
+    -moz-box-shadow:    0px 1px 4px rgba(68,68,68,0.3);
+    -webkit-box-shadow: 0px 1px 4px rgba(68,68,68,0.3);
+    box-shadow:         0px 1px 4px rgba(68,68,68,0.3);
+
+    a.intigi_found_at {
+      text-decoration: none;
+      text-align: left;
+      color: #bbb;
+
+    }
+    .recommendation-preview {
+
+    }
+    .recommendation-popularity {
+      font-size: 11px;
+      color: #bbb;
+      text-align: right;
+      width: 225px;
+      position: absolute;
+      bottom: 8px;
+      right: 15px;
+
+      a {
+        font-size: 11px;
+        font-weight: normal;
+        display: inline;
+        text-decoration: none;
+      }
+    }
+
+    a.manually-hide {
+      font-size: 11px;
+      color: #bbb;
+      position: absolute;
+      top: 5px;
+      right: 8px;
+      text-decoration: none;
+      color: #ccc;
+      padding: 5px;
+      display:inline;
+
+      &:hover {
+        color: black;
+      }
+    }
+
+    a.manually-star{
+      font-size: 14px;
+      color: #bbb;
+      position: absolute;
+      bottom: 2px;
+      left: 10px;
+      text-decoration: none;
+      color: #ccc;
+      padding: 5px;
+      display:inline;
+      margin-bottom: 0;
+
+      &.active {
+        color: #ffc400;
+      }
+      &:hover {
+        color: black;
+      }
+    }
+
+
+    a{
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .provider{
+      display:none;
+    }
+
+    img.thumb {
+      max-height:250px !important;
+      max-width:200px !important;
+      float: left;
+      margin: 0 10px 5px 0;
+      background-color:white;
+    }
+  }
+
+}

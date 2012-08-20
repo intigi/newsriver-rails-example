@@ -1,0 +1,37 @@
+.river
+  .header
+    %h1= river.title
+    %p
+      = river.body
+      &nbsp;
+
+  .river-views
+    = link_to "All Items", river, :class => 'all-recommendations'
+    = link_to image_tag('rss.png'), river_path(river, :format => :atom)
+    &nbsp;&nbsp;
+    = link_to "Starred Items", starred_river_path(river), :class => 'starred-recommendations'
+    = link_to image_tag('rss.png'), starred_river_path(river, :format => :atom)
+
+  .recommendations
+    - recommendations.each do |recommendation|
+      %div{ :id => dom_id(recommendation), :class => "recommendation" }
+        .recommendation-preview
+          = link_to recommendation.intigi_found_at.to_s(:full_date), recommendation.intigi_url, :class => 'intigi_found_at'
+        .recommendation-popularity
+          Intigi Score: #{recommendation.intigi_popularity }% &mdash; Tweets: #{ link_to recommendation.topsy_trackback_total, "http://moonbird.io/?url=#{recommendation.intigi_url}", :target => 'blank', :title => 'See who shared this&hellip;'.html_safe }
+
+        - if @logged_in.eql?(true)
+          = link_to "X", river_recommendation_hide_path(river,recommendation), :remote => true,
+              :method => 'put',
+              :success => "$(this).hide()",
+              :class => 'manually-hide',
+              :title => 'Hide from river&hellip;'.html_safe
+          =link_to "&#9733;".html_safe,
+                    river_recommendation_toggle_star_path(river,recommendation),
+                    :remote => true,
+                    :method => :put,
+                    :class => (recommendation.is_manually_starred? ? 'manually-star active' : 'manually-star')
+
+        - else
+          - if recommendation.is_manually_starred?
+            =link_to "&#9733;".html_safe, "#", :class => "manually-star active", :title => 'Starred by admin.'

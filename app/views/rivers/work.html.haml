@@ -1,0 +1,81 @@
+%p#notice= notice
+
+%p
+  %b
+    Fetching #{ @river.intigi_recommendations_url }&hellip;
+
+%p
+  %strong Intigi Popularity Threshold (0-100):
+  #{ @river.intigi_popularity_threshold }
+  %br
+  %strong Topsuy Popularity Threshold (# Tweets):
+  #{ @river.topsy_popularity_threshold }
+
+
+
+
+%h3 Found Recommendations:
+
+%table{:style => 'width:1000px'}
+  %tr{:style => 'text-align:left'}
+    %th
+    %th Article
+    %th Found
+    %th Popularity
+
+
+  - @new_recommendations.each do |recommendation|
+    %tr
+      %td{:valign => 'top'}
+        %strong{:style => 'color:#0D0'} NEW
+
+      %td{:valign => 'top', :style => 'width:400px'}
+        %strong= link_to recommendation.intigi_title, recommendation.intigi_url
+        %br
+        %em= recommendation.intigi_host_name
+        &mdash;
+        = recommendation.intigi_excerpt
+        %br
+        Word Count:
+        = recommendation.intigi_word_count
+      %td{:valign => 'top'}= recommendation.intigi_found_at.to_s(:full_date)
+      %td{:valign => 'top'}
+        Intigi:
+        = recommendation.intigi_popularity
+        %br
+        Topsy:
+        = recommendation.topsy_trackback_total
+        - if recommendation.show_in_river?
+          %br
+          %strong{:style => 'color:#0C0'} In River
+
+  - @existing_recommendations.each do |recommendation|
+    %tr
+      %td{:valign => 'top'}
+        %strong Existed
+      %td{:valign => 'top', :style => 'width:400px'}
+        %strong= link_to recommendation.intigi_title, recommendation.intigi_url
+        %br
+        %em= recommendation.intigi_host_name
+        &mdash;
+        = recommendation.intigi_excerpt
+        %br
+        Word Count:
+        = recommendation.intigi_word_count
+      %td{:valign => 'top'}= recommendation.intigi_found_at.to_s(:full_date)
+      %td{:valign => 'top'}
+        Intigi:
+        = recommendation.intigi_popularity
+        %br
+        Topsy:
+        = recommendation.topsy_trackback_total
+        - if recommendation.show_in_river?
+          %br
+          %strong{:style => 'color:#0C0'} In River
+
+
+
+
+= link_to 'Edit', edit_river_path(@river)
+|
+= link_to 'Back', rivers_path

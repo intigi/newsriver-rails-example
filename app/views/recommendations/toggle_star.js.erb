@@ -1,0 +1,5 @@
+<% if @manually_starred == true %>
+$('#<%= dom_id(@recommendation) %> > .manually-star').addClass('active');
+<% else %>
+$('#<%= dom_id(@recommendation) %> > .manually-star').removeClass('active');
+<% end %>
